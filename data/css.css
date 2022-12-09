@@ -1,0 +1,272 @@
+body{
+    background:#ccc;
+}
+
+.aneko{
+    height: 100px;
+    width: 100px;
+}
+    .aneko::before{
+       content: '';
+       height: 8px; width: 50px; background: #000; opacity: .2; border-radius: 50%;
+       position: absolute;
+       top:560px;
+       left: 360px;
+       animation: shadow .5s linear infinite;
+}
+    .aneko::after{
+        border-radius: 5px;
+        background:url(Image/aneko.png);
+        animation: rotate .5s linear infinite;
+        content: '';
+        position: absolute;
+        top:450px;
+        left: 335px;
+        width: 100px;
+        height: 100px;
+    }
+
+.bneko{
+    height: 100px;
+    width: 100px;
+}
+    .bneko::before{
+       content: '';
+       height: 8px; width: 50px; background: #000; opacity: .2; border-radius: 50%;
+       position: absolute;
+       top:560px;
+       left: 460px;
+       animation: shadow .5s linear infinite;
+}
+    .bneko::after{
+        border-radius: 5px;
+        background:url(Image/bneko.png);
+        animation: rotate .5s linear infinite;
+        content: '';
+        position: absolute;
+        top:450px;
+        left: 435px;
+        width: 100px;
+        height: 100px;
+    }
+
+.cneko{
+    height: 100px;
+    width: 100px;
+    text-align:"center";
+ }
+   .cneko::before{
+       content: '';
+       height: 8px; width: 50px; background: #000; opacity: .2; border-radius: 50%;
+       position: absolute;
+       top:560px;
+       left: 560px;
+       text-align:"center";
+       animation: shadow .5s linear infinite;
+    
+ }
+    .cneko::after{
+        border-radius: 5px;
+        background:url(Image/cneko.png);
+        animation: rotate .5s linear infinite;
+        content: '';
+        position: absolute;
+        top:450px;
+        left: 535px;
+        width: 100px;
+        height: 100px;
+        text-align:"center";
+    }
+
+.dneko{
+    height: 100px;
+    width: 100px;
+
+}
+    .dneko::before{
+       content: '';
+       height: 8px; width: 50px; background: #000; opacity: .2; border-radius: 50%;
+       position: absolute;
+       top:560px;
+       left: 650px;
+       animation: shadow .5s linear infinite;
+    
+}
+    .dneko::after{
+        border-radius: 5px;
+        background:url(Image/dneko.png);
+        animation: rotate .5s linear infinite;
+        content: '';
+        position: absolute;
+        top:450px;
+        left: 635px;
+        width: 100px;
+        height: 100px;
+    }
+
+.eneko{
+        height: 100px;
+        width: 100px;
+    
+    }
+    .eneko::before{
+        content: '';
+        height: 8px; width: 50px; background: #000; opacity: .2; border-radius: 50%;
+        position: absolute;
+        top:560px;
+        left: 760px;
+        animation: shadow .5s linear infinite;
+        
+    }
+    .eneko::after{
+        border-radius: 5px;
+        background:url(Image/eneko.png);
+        animation: rotate .5s linear infinite;
+        content: '';
+        position: absolute;
+        top:450px;
+        left: 735px;
+        width: 100px;
+        height: 100px;
+        }
+    
+
+.back{
+    position: relative;
+}
+
+.loginmain{
+    position:absolute;
+    top: 160px;
+    left:420px;
+}
+.groupinmain{
+    position:absolute;
+    top: 140px;
+    left:360px;
+}
+.profilemain{
+    position:absolute;
+    top: 140px;
+    left: 360px;
+}
+.chatmain {
+    position: absolute;
+    top: 150px;
+    left: 400px;
+    width: 450px;
+    height: 270px;
+/* divからあふれたところはスクロールで表示にする */
+    overflow: auto;
+}
+*/スクロールバーを消す*/
+.chatmain {
+    font-size: 20px;
+    -ms-overflow-style: none;
+    /* IE, Edge 対応 */
+    scrollbar-width: none;
+    /* Firefox 対応 */
+}
+*/スクロールバーを消す*/
+.chatmain::-webkit-scrollbar {
+    /* Chrome, Safari 対応 */
+    display: none;
+}
+
+.one{
+    display:flex;
+}
+/*
+.iconA{
+    display: flex;
+    width: 80px;
+}
+.chatA{
+    display: flex;
+    width: 300px;
+}
+.iconB{
+    display: flex;
+    width: 80px;
+}
+.chatB{
+    display: flex;
+    width: 300px;
+}
+*/
+
+.login{
+    height:130px;
+    width:274px;
+    position:absolute;
+    top: 70px;
+    left:10px;
+
+}
+.chat{
+    height:130px;
+    width:274px;
+    position:absolute;
+    top: 170px;
+    left:10px;
+
+}
+.play{
+    height:130px;
+    width:274px;
+    position:absolute;
+    top: 270px;
+    left:10px;
+
+}
+.feed{
+    height:130px;
+    width:274px;
+    position:absolute;
+    top: 370px;
+    left:10px;
+
+}
+.logout{
+        height:130px;
+    width:274px;
+    position:absolute;
+    top: 70px;
+    left:10px;
+
+}
+@keyframes shadow {
+0%, 100% {transform: scaleX(1);}
+50% {transform: scaleX(1.2);}
+}
+
+@keyframes rotate {
+0% {
+transform: translateY(0) ;
+}
+25% {
+    transform: translateY(10px);
+}
+50% {
+    transform: translateY(20px) scale(1.1, 0.9);
+   
+}
+75% {
+    ransform: translateY(10px) ;
+}
+100% {
+    transform: translateY(0) ;
+}
+}
+
+.welcome{
+    position:absolute;
+    top: 55px;
+    left:490px;
+}
+
+.message{
+    position:absolute;
+    top: 440px;
+    left:460px;
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, 
+  maximum-scale=1.0, user-scalable=no" />
+    <!-- ajaxを使用 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var xhr = new XMLHttpRequest();
+        var change = false;
+        var px = 0;
+        var py = 0;
+        var pz = 0;
+        var isSet = false;
+
+        var set = function set() {
+                isSet = true;
+                acceleration();
+                console.log("set");
+            }
+            //計測開始
+        var on = function() {
+                change = true;
+            }
+            //計測終了 / 加速度変化量に応じて猫の発言を変化
+        var off = function() {
+            change = false;
+            var group_id = 1;
+            var today = new Date();
+            var date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+            var url = "https://watanabe.nkmr.io/WebP/final/android_processing.php?operate=view&group_id=" + group_id + "&date=" + date;
+            $.getJSON(url, function(data) {
+                //console.log(data[0].sum);
+                //十分遊んであげたなって数値になったら、猫に発言させる
+                var message = "";
+                if (data[0].sum < 50) {
+                    //http://watanabe.nkmr.io/WebP/final/chat_insert.php?group_id=1&message= &date=2020-01-14
+                    message = "少し遊んでもらった！";
+                } else if (data[0].sum < 70) {
+                    message = "遊んでもらった！";
+                } else if (data[0].sum < 100) {
+                    message = "いっぱい遊んでもらった！";
+                } else {
+                    message = "沢山遊んでもらった！";
+                }
+                var url_insert = "https://watanabe.nkmr.io/WebP/final/chat_insert.php?group_id=1&message=" + message + "&date=" + date;
+                console.log(url_insert);
+                xhr.open('GET', url_insert);
+                xhr.send();
+            });
+        }
+
+        //一秒おきに加速度を計測
+        setInterval(set, 1000);
+
+        function acceleration() {
+            window.addEventListener("devicemotion", function a(event) {
+                //console.log(isSet);
+                if (isSet && change) {
+                    var e = event.acceleration;
+                    var x = e.x;
+                    var y = e.y;
+                    var z = e.z;
+                    var disA = Math.abs(px.toFixed(2) - x.toFixed(2));
+                    var disB = Math.abs(py.toFixed(2) - y.toFixed(2));
+                    var disG = Math.abs(pz.toFixed(2) - z.toFixed(2));
+
+                    var result = document.getElementById("result_acc");
+
+                    var today = new Date();
+                    var date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+                    var group_id = 1;
+                    var url = "https://watanabe.nkmr.io/WebP/final/android_processing.php?operate=insert&x=" + disA + "&y=" + disB + "&z=" + disG + "&group_id=" + group_id + "&date=" + date;
+
+                    //確認用表示
+                    result.innerHTML = "加速度センサー<br />" +
+                        "x：" + x.toFixed(2) + "<br />" +
+                        "y ：" + y.toFixed(2) + "<br />" +
+                        "z：" + z.toFixed(2) + "<br />" +
+                        "url:" + url;
+
+                    xhr.open('GET', url);
+                    xhr.send();
+
+                    px = x;
+                    py = y;
+                    pz = z;
+
+                    //ajax接続状況を表示
+                    xhr.onreadystatechange = function() {
+                        console.log(xhr.status)
+                    };
+
+                }
+                isSet = false;
+            }, false);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="result_acc"></div>
+    <br />
+    <button id="on" onclick="on()">Start</button>
+    <button id="off" onclick="off()">End</button>
+</body>
+
+</html>
